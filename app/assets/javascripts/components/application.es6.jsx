@@ -30,7 +30,9 @@ loadPoints = (longitude, latitude)=> {
 class Application extends React.Component {
 
   render () {
-    loadPoints(this.props.params.longitude, this.props.params.latitude)
+    if (this.props.params.longitude && this.props.params.latitude) {
+      loadPoints(this.props.params.longitude, this.props.params.latitude)
+    }
     return <Panel />;
   }
 }
