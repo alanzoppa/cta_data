@@ -1,6 +1,6 @@
 require 'csv'
 
-task import_csvs_in_cta_fixtures_dir: [:environment] do
+task import_csvs: [:environment] do
   input_path = File.join(Rails.root, 'cta_fixtures')
   filenames = Dir.entries(input_path).select {|f| f =~ /\.csv$/}
   filenames.map! {|f| File.join(input_path, f) }
