@@ -8,6 +8,12 @@ html, body {
   padding: 0;
 }
 
+#panel {
+  width: 300px;
+  background: red;
+  height: 100%;
+  float: left;
+}
 
 #map {
   height: 100%;
