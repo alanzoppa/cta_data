@@ -9,8 +9,8 @@ class StopsController < ApplicationController
     permitted = params.permit(:longitude, :latitude, :radius)
 
     stops = Stop.where_near(
-      permitted[:longitude].to_f,
       permitted[:latitude].to_f,
+      permitted[:longitude].to_f,
       permitted[:radius].to_f,
     )
 

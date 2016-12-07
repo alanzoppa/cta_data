@@ -36,4 +36,3 @@ class Application extends React.Component {
     return <Panel />;
   }
 }
-
