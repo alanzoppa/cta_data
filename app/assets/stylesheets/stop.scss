@@ -8,6 +8,11 @@ html, body {
   padding: 0;
 }
 
+div[data-react-class=Application] {
+  height: 100%;
+  float: left;
+}
+
 #panel {
   width: 300px;
   background: red;

@@ -3,30 +3,6 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 
-loadPoints = (longitude, latitude)->
-  for m in window.markers
-    m.setMap null
-  $.get(
-    'stops.json',
-    {
-      longitude: longitude,
-      latitude: latitude,
-      radius: 250
-    }
-  ).done(
-    (data)=>
-      for stop in data.stops
-        console.log [stop.location[0], stop.location[1]]
-        window.markers.push(
-          new google.maps.Marker({
-            position: {lat: stop.location[0], lng: stop.location[1]},
-            map: @map
-          })
-        )
-  )
-
-
-
 @initMap = ->
   @markers = []
   @map = new google.maps.Map(
