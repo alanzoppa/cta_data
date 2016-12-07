@@ -16,7 +16,7 @@ task import_csvs: [:environment] do
       row = HashWithIndifferentAccess.new(headers.zip(row).to_h)
       street = Street.find_or_create_by(street_name: row[:on_street])
       coords_string = row[:location].gsub(/[)( ]*/, '')
-      longitude, latitude = coords_string.split(',').map(&:to_f) unless coords_string.nil?
+      latitude, longitude = coords_string.split(',').map(&:to_f) unless coords_string.nil?
       
       stop = Stop.create(
         boardings: row[:boardings],

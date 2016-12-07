@@ -1,4 +1,6 @@
-window.loadPoints = (longitude, latitude)=> {
+loadPoints = (longitude, latitude)=> {
+  longitude = parseFloat(longitude);
+  latitude = parseFloat(latitude);
   window.markers.map((m)=> {m.setMap(null)})
   $.get(
     'stops.json',
@@ -10,7 +12,6 @@ window.loadPoints = (longitude, latitude)=> {
   ).done(
     (data)=> {
       for (var stop of data.stops) {
-        console.log [stop.location[0], stop.location[1]]
         window.markers.push(
           new google.maps.Marker({
             position: {lat: stop.location[0], lng: stop.location[1]},
@@ -29,6 +30,7 @@ window.loadPoints = (longitude, latitude)=> {
 class Application extends React.Component {
 
   render () {
+    loadPoints(this.props.params.longitude, this.props.params.latitude)
     return <Panel />;
   }
 }

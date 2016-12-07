@@ -11,15 +11,15 @@ class Stop < ApplicationRecord
     Stop.includes(:street, :routes).where(
       <<-SQL
       earth_box(
-        ll_to_earth(longitude, latitude),
+        ll_to_earth(latitude, longitude),
         #{radius}
-      ) @> ll_to_earth(#{longitude}, #{latitude})
+      ) @> ll_to_earth(#{latitude}, #{longitude})
 
       AND
       
       earth_distance(
-        ll_to_earth(longitude, latitude),
-        ll_to_earth(#{longitude}, #{latitude})
+        ll_to_earth(latitude, longitude),
+        ll_to_earth(#{latitude}, #{longitude})
       ) < #{radius}
       SQL
     )
@@ -29,7 +29,7 @@ class Stop < ApplicationRecord
   def to_object
     {
       #id: self.id,
-      location: [self.longitude.to_f, self.latitude.to_f],
+      location: [self.latitude.to_f, self.longitude.to_f],
       street: self.street.street_name,
       routes: self.routes.map(&:route_name)
     }

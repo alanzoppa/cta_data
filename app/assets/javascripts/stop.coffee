@@ -3,17 +3,20 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 
+@markers = []
+
 @initMap = ->
-  @markers = []
   @map = new google.maps.Map(
     document.getElementById('map'),
     { center: { lat: 41.88, lng: -87.65 }, zoom: 14 }
   )
+  window.location.hash = "#/point/-87.65/41.88"
 
 
   @map.addListener 'click', (click)->
-    loadPoints(
-      click.latLng.lat(),
-      click.latLng.lng()
-    )
+    window.location.hash = "#/point/#{click.latLng.lng()}/#{click.latLng.lat()}"
+    #loadPoints(
+      #click.latLng.lat(),
+      #click.latLng.lng()
+    #)
 
