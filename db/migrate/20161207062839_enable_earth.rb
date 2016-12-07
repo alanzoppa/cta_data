@@ -1,8 +1,10 @@
 class EnableEarth < ActiveRecord::Migration[5.0]
   def up
-    execute "CREATE EXTENSION earthdistance CASCADE;"
+    execute "CREATE EXTENSION cube;"
+    execute "CREATE EXTENSION earthdistance;"
   end
   def down
-    execute "DROP EXTENSION earthdistance CASCADE;"
+    execute "DROP EXTENSION cube;"
+    execute "DROP EXTENSION earthdistance;"
   end
 end
