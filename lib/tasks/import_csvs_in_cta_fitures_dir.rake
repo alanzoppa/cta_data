@@ -22,7 +22,7 @@ task import_csvs_in_cta_fixtures_dir: [:environment] do
         boardings: row[:boardings],
         alightings: row[:alightings],
         month_beginning: Date.parse(row[:month_beginning]),
-        location: "POINT(#{latitude} #{longitude})",
+        location: Stop.factory.point(latitude, longitude),
         street_id: street.id,
       )
 

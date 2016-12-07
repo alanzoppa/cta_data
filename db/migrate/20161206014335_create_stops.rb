@@ -8,6 +8,7 @@ class CreateStops < ActiveRecord::Migration[5.0]
 
       t.st_point :location, geographic: true
 
+
       t.integer :street_id
     end
 

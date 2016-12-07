@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
-  resource :stop, only: [:index, :show]
-  root to: "stop#index"
+  resource :stops, only: [:index, :show]
+  root to: "stops#index"
 end
