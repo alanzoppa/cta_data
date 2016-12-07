@@ -5,8 +5,9 @@ class CreateStops < ActiveRecord::Migration[5.0]
       t.float :boardings
       t.float :alightings
       t.date :month_beginning
-      t.float :latitude
-      t.float :longitude
+
+      t.st_point :location, geographic: true
+
       t.integer :street_id
     end
 
@@ -25,6 +26,9 @@ class CreateStops < ActiveRecord::Migration[5.0]
     end
 
     add_foreign_key :stops, :streets
+
+    add_index :stops, :location, using: :gist
+
 
   end
 end
