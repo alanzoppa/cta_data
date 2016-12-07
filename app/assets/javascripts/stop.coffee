@@ -11,7 +11,7 @@ loadPoints = (longitude, latitude)->
     {
       longitude: longitude,
       latitude: latitude,
-      radius: 100
+      radius: 250
     }
   ).done(
     (data)=>
@@ -31,7 +31,7 @@ loadPoints = (longitude, latitude)->
   @markers = []
   @map = new google.maps.Map(
     document.getElementById('map'),
-    { center: { lat: 41.87632184, lng: -87.77410482 }, zoom: 14 }
+    { center: { lat: 41.88, lng: -87.65 }, zoom: 14 }
   )
 
 

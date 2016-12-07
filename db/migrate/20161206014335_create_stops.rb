@@ -6,7 +6,8 @@ class CreateStops < ActiveRecord::Migration[5.0]
       t.float :alightings
       t.date :month_beginning
 
-      t.st_point :location, geographic: true
+      t.decimal :latitude
+      t.decimal :longitude
 
 
       t.integer :street_id
@@ -28,7 +29,8 @@ class CreateStops < ActiveRecord::Migration[5.0]
 
     add_foreign_key :stops, :streets
 
-    add_index :stops, :location, using: :gist
+    add_index :stops, :latitude
+    add_index :stops, :longitude
 
 
   end

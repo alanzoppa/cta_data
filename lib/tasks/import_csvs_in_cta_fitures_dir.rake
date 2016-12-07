@@ -16,13 +16,14 @@ task import_csvs_in_cta_fixtures_dir: [:environment] do
       row = HashWithIndifferentAccess.new(headers.zip(row).to_h)
       street = Street.find_or_create_by(street_name: row[:on_street])
       coords_string = row[:location].gsub(/[)( ]*/, '')
-      latitude, longitude = coords_string.split(',').map(&:to_f) unless coords_string.nil?
+      longitude, latitude = coords_string.split(',').map(&:to_f) unless coords_string.nil?
       
       stop = Stop.create(
         boardings: row[:boardings],
         alightings: row[:alightings],
         month_beginning: Date.parse(row[:month_beginning]),
-        location: Stop.factory.point(latitude, longitude),
+        longitude: longitude,
+        latitude: latitude,
         street_id: street.id,
       )
 

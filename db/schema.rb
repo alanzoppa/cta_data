@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161206014335) do
+ActiveRecord::Schema.define(version: 20161207062839) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "postgis"
+  enable_extension "cube"
+  enable_extension "earthdistance"
 
   create_table "routes", force: :cascade do |t|
     t.string "route_name"
@@ -28,12 +29,14 @@ ActiveRecord::Schema.define(version: 20161206014335) do
   end
 
   create_table "stops", force: :cascade do |t|
-    t.float     "boardings"
-    t.float     "alightings"
-    t.date      "month_beginning"
-    t.geography "location",        limit: {:srid=>4326, :type=>"point", :geographic=>true}
-    t.integer   "street_id"
-    t.index ["location"], name: "index_stops_on_location", using: :gist
+    t.float   "boardings"
+    t.float   "alightings"
+    t.date    "month_beginning"
+    t.decimal "latitude"
+    t.decimal "longitude"
+    t.integer "street_id"
+    t.index ["latitude"], name: "index_stops_on_latitude", using: :btree
+    t.index ["longitude"], name: "index_stops_on_longitude", using: :btree
   end
 
   create_table "streets", force: :cascade do |t|
