@@ -6,4 +6,5 @@ RSpec.describe StopsController, type: :controller do
     expect(Stop).to receive(:where_near).and_return([])
     get :show, latitude: 41.881128434236246, longitude: -87.6321029663086, radius: 250, format: 'json'
   end
+
 end
