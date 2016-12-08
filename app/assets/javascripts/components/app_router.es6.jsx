@@ -6,6 +6,7 @@ class AppRouter extends React.Component {
     return <Router history={ReactRouter.hashHistory}>
       <Route path="/" component={Application}>
         <Route path="point/:longitude/:latitude" component={Application}/>
+        <Route path="route/:route" component={Application}/>
       </Route>
     </Router>
 

@@ -19,7 +19,7 @@ class Stop < ApplicationRecord
 
   def to_object
     {
-      #id: self.id,
+      id: self.id,
       location: [self.latitude.to_f, self.longitude.to_f],
       street: self.street.street_name,
       routes: self.routes.map(&:route_name)

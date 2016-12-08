@@ -10,6 +10,7 @@
     document.getElementById('map'),
     { center: { lat: 41.88, lng: -87.65 }, zoom: 14 }
   )
+  window.infowindow = new google.maps.InfoWindow()
 
 
   @map.addListener 'click', (click)->
