@@ -12,12 +12,25 @@ loadPoints = (longitude, latitude)=> {
   ).done(
     (data)=> {
       for (var stop of data.stops) {
-        window.markers.push(
-          new google.maps.Marker({
-            position: {lat: stop.location[0], lng: stop.location[1]},
-            map: window.map
-          })
-        )
+        console.log(stop.routes);
+        var routeLinks = stop.routes.map( (r)=> { return `<a href="#/route/${r}">${r}</a>` });
+        console.log(routeLinks);
+
+        var infowindow = new google.maps.InfoWindow({
+          content: `<p>${routeLinks.join(', ')}`
+        });
+        var marker = new google.maps.Marker({
+          position: {lat: stop.location[0], lng: stop.location[1]},
+          map: window.map,
+          title: 'herp'
+        })
+
+        marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
+
+
+        window.markers.push(marker)
       }
     }
   )

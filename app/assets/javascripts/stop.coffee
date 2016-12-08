@@ -14,8 +14,3 @@
 
   @map.addListener 'click', (click)->
     window.location.hash = "#/point/#{click.latLng.lng()}/#{click.latLng.lat()}"
-    #loadPoints(
-      #click.latLng.lat(),
-      #click.latLng.lng()
-    #)
-
