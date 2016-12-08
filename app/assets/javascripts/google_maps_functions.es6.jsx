@@ -30,10 +30,6 @@ var loadAdjacentStops = (longitude, latitude)=> {
   ) 
 }
 
-var loadRouteStops = (routeName)=> {
-   return $.get(`/stops/${routeName}`) 
-}
-
 var populateMarkers = (data)=> {
   for (var stop of data.stops) {
       var markerLatlng = new google.maps.LatLng(stop.location[0], stop.location[1]);
@@ -50,4 +46,9 @@ var populateMarkers = (data)=> {
 var loadPoints = (longitude, latitude)=> {
   loadAdjacentStops(longitude,latitude).done(populateMarkers)
 }
+
+var loadRouteStops = (routeName)=> {
+   return $.get(`/stops/${routeName}`).done(populateMarkers)
+}
+
 

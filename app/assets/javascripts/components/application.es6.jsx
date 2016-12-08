@@ -7,7 +7,7 @@ class Application extends React.Component {
     }
     else if (this.props.params.route) {
       clearMarkers();
-      loadRouteStops(this.props.params.route).done(populateMarkers);
+      loadRouteStops(this.props.params.route);
     }
     return <Panel />;
   }
