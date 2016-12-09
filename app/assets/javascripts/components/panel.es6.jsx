@@ -10,7 +10,7 @@ class Panel extends React.Component {
     return (
       <div id="panel">
         <ul>
-          {this.props.stops.map((stop)=> <li key={stop.id}>{stop.cross_street} ({stop.routes.join(', ')})</li> )}
+          {this.props.stops.map((stop)=> <Stop {...stop} key={stop.id} /> )}
         </ul>
       </div>
     )
