@@ -1,8 +1,7 @@
 class Stop < ApplicationRecord
   belongs_to :street
   has_and_belongs_to_many :routes
-  default_scope { order('cross_street ASC') }
-
+  default_scope { order('cross_street ASC') } 
 
   def self.where_near(latitude, longitude, radius) # radius in meters
 

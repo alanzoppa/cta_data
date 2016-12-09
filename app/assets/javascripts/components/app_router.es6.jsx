@@ -13,9 +13,3 @@ class AppRouter extends React.Component {
 
   }
 }
-        //<Route path="about" component={About}/>
-        //<Route path="users" component={Users}>
-          //<Route path="/user/:userId" component={User}/>
-        //</Route>
-
-        //<Route path="*" component={NoMatch}/>

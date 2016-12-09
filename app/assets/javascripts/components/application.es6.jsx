@@ -1,33 +1,45 @@
 class Application extends React.Component {
   constructor() {
     super();
-    this.state = { lat: null, lng: null, stops: [] };
+    this.state = { stops: [] };
   }
 
-  componentDidMount() { this.getPoints(); }
+  componentDidMount() { this.updateStops(); }
 
-  componentDidUpdate() { this.getPoints(); }
+  componentDidUpdate() { this.updateStops(); }
 
   getPoints() {
-    const lng = this.props.params.longitude;
-    const lat = this.props.params.latitude;
-    const route = this.props.params.route;
-    const stop_id = this.props.params.stop_id;
+    const s = this.state;
+    const p = this.props.params;
+
+    switch(true) {
+      case (p.latitude && p.longitude && p.latitude != s.latitude && p.longitude != s.longitude):
+        return loadAdjacentStops(p.longitude, p.latitude);
+      case (p.route && p.route != s.route):
+        return $.get(`/stops/route/${p.route}`)
+      case (p.stop_id && p.stop_id != s.stop_id):
+        return $.get(`/stops/${this.props.params.stop_id}`);
+    }
+  }
+
+  updateStops() {
+    const s = this.state;
+    const p = this.props.params;
 
     updateState = (data)=> { 
       this.setState(
-        {lat: lat, lng: lng, stops: data.stops, route: route, stop_id: stop_id}
+        {
+          latitude: p.latitude,
+          longitude: p.longitude,
+          stops: data.stops,
+          route: p.route,
+          stop_id: p.stop_id
+        }
       );
     } 
-
-    if ( lat && lng && lng != this.state.lng && lat != this.state.lat ) {
-      loadAdjacentStops(lng,lat).done(updateState);
-    }
-    else if (route && route != this.state.route) {
-      $.get(`/stops/route/${route}`).done(updateState);
-    }
-    else if (stop_id && stop_id != this.state.stop_id) {
-      $.get(`/stops/${this.props.params.stop_id}`).done(updateState);
+    
+    if (getPoints = this.getPoints()) {
+      getPoints.done(updateState)
     }
   }
 
