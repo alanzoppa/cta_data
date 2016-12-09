@@ -30,8 +30,8 @@ var loadAdjacentStops = (longitude, latitude)=> {
   ) 
 }
 
-var populateMarkers = (data)=> {
-  for (var stop of data.stops) {
+var populateMarkers = (stops)=> {
+  for (var stop of stops) {
       var markerLatlng = new google.maps.LatLng(stop.location[0], stop.location[1]);
       var title = stop.street;
       var routeLinks = stop.routes.map( (r)=> { return `<a href="#/route/${r}">#${r}</a>` });
@@ -41,14 +41,3 @@ var populateMarkers = (data)=> {
       ) 
   }
 }
-
-
-var loadPoints = (longitude, latitude)=> {
-  loadAdjacentStops(longitude,latitude).done(populateMarkers)
-}
-
-var loadRouteStops = (routeName)=> {
-   return $.get(`/stops/${routeName}`).done(populateMarkers)
-}
-
-
