@@ -3,11 +3,18 @@ class Stop extends React.Component {
     const [lat,lng] = this.props.location;
     const c = this.props.cross_street;
     const rs = this.props.routes;
+    const stopHref = `#/stops/${this.props.id}`;
     return (
       <li className='stop'>
-        <ReactRouter.Link to={`/stops/${this.props.id}`}>{c}</ReactRouter.Link>
+        <a href={stopHref}>{c}</a>
         <ul className='route-links'>
-          {rs.map((r)=> <li key={r}><RouteLink route={r} /></li> )}
+          {rs.map((r)=> {
+            const stopHref = `#/route/${r}`
+            return(
+              <li key={r}>
+                <a href={stopHref}>{r}</a>
+              </li>)
+          })}
         </ul>
       </li>
     );
