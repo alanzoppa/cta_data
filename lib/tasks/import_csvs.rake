@@ -25,6 +25,7 @@ task import_csvs: [:environment] do
         longitude: longitude,
         latitude: latitude,
         street_id: street.id,
+        cross_street: row[:cross_street],
       )
 
       routes = row[:routes]&.split(',') || []

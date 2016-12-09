@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20161207062839) do
     t.decimal "latitude"
     t.decimal "longitude"
     t.integer "street_id"
+    t.string  "cross_street"
     t.index ["latitude"], name: "index_stops_on_latitude", using: :btree
     t.index ["longitude"], name: "index_stops_on_longitude", using: :btree
   end

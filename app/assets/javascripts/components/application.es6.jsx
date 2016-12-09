@@ -28,6 +28,6 @@ class Application extends React.Component {
   render () {
     clearMarkers();
     populateMarkers(this.state.stops);
-    return <Panel />;
+    return <Panel stops={this.state.stops} />;
   }
 }

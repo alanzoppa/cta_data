@@ -4,13 +4,11 @@ class CreateStops < ActiveRecord::Migration[5.0]
     create_table :stops do |t|
       t.float :boardings
       t.float :alightings
-      t.date :month_beginning
-
+      t.date :month_beginning 
       t.decimal :latitude
-      t.decimal :longitude
-
-
+      t.decimal :longitude 
       t.integer :street_id
+      t.string :cross_street
     end
 
     create_table :streets do |t|
