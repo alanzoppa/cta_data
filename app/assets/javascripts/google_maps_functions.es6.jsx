@@ -2,7 +2,7 @@ var clearMarkers = ()=> {
   for (var m of window.markers) { m.setMap(null); }
 }
 
-var createMarker = (latlon,title,iwContent) => {
+var createMarker = (latlon, title, content) => {
   var marker = new google.maps.Marker({
     position: latlon,
     title: title,
@@ -10,14 +10,15 @@ var createMarker = (latlon,title,iwContent) => {
   });
 
   google.maps.event.addListener(marker, 'click', function () {
-      window.infowindow.setContent(iwContent);
+      window.infowindow.setContent(content);
       window.infowindow.open(map, marker);
       });
   return marker;
   } 
 
 
-var loadAdjacentStops = (longitude, latitude)=> {
+var loadAdjacentStops = (longitude, latitude, radius)=> {
+  radius = radius || 250;
   longitude = parseFloat(longitude);
   latitude = parseFloat(latitude);
   return $.get(
@@ -25,19 +26,23 @@ var loadAdjacentStops = (longitude, latitude)=> {
     {
       longitude: longitude,
       latitude: latitude,
-      radius: 250
+      radius: radius
     }
   ) 
 }
 
 var populateMarkers = (stops)=> {
   for (var stop of stops) {
-      var markerLatlng = new google.maps.LatLng(stop.location[0], stop.location[1]);
+      var markerLatlng = new google.maps.LatLng(
+        stop.location[0], stop.location[1]
+      );
       var title = stop.street;
-      var routeLinks = stop.routes.map( (r)=> { return `<a href="#/route/${r}">#${r}</a>` });
-      var iwContent = `${stop.street}: ${routeLinks.join(', ')}`
+      var routeLinks = stop.routes.map(
+        (r)=> { return `<a href="#/route/${r}">#${r}</a>` }
+      );
+      var content = `${stop.street}: ${routeLinks.join(', ')}`
       window.markers.push(
-        createMarker(markerLatlng ,title,iwContent)
+        createMarker(markerLatlng, title, content)
       ) 
   }
 }
