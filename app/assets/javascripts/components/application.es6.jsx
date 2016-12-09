@@ -9,19 +9,25 @@ class Application extends React.Component {
   componentDidUpdate() { this.getPoints(); }
 
   getPoints() {
-    var lng = this.props.params.longitude;
-    var lat = this.props.params.latitude;
-    var route = this.props.params.route;
+    const lng = this.props.params.longitude;
+    const lat = this.props.params.latitude;
+    const route = this.props.params.route;
+    const stop_id = this.props.params.stop_id;
 
     updateState = (data)=> { 
-      this.setState({lat: lat, lng: lng, stops: data.stops, route: route});
+      this.setState(
+        {lat: lat, lng: lng, stops: data.stops, route: route, stop_id: stop_id}
+      );
     } 
 
     if ( lat && lng && lng != this.state.lng && lat != this.state.lat ) {
       loadAdjacentStops(lng,lat).done(updateState);
     }
     else if (route && route != this.state.route) {
-      $.get(`/stops/${route}`).done(updateState);
+      $.get(`/stops/route/${route}`).done(updateState);
+    }
+    else if (stop_id && stop_id != this.state.stop_id) {
+      $.get(`/stops/${this.props.params.stop_id}`).done(updateState);
     }
   }
 

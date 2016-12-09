@@ -5,7 +5,7 @@ class Stop extends React.Component {
     const rs = this.props.routes;
     return (
       <li className='stop'>
-        <ReactRouter.Link to={`/point/${lat}/${lng}`}>{c}</ReactRouter.Link>
+        <ReactRouter.Link to={`/stops/${this.props.id}`}>{c}</ReactRouter.Link>
         <ul className='route-links'>
           {rs.map((r)=> <li key={r}><RouteLink route={r} /></li> )}
         </ul>

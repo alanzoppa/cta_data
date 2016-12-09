@@ -1,11 +1,5 @@
 class StopsController < ApplicationController
   def index 
-    respond_to do |format|
-      format.html
-    end
-  end
-
-  def show
     permitted = params.permit(:longitude, :latitude, :radius)
 
     stops = Stop.where_near(
@@ -20,6 +14,10 @@ class StopsController < ApplicationController
         render json: {stops: stops.map {|s| s.to_object}}
       }
     end
+  end
+
+  def show
+    render json: {stops: [Stop.find(params[:id]).to_object]}
   end
 
   def stops_for_route
