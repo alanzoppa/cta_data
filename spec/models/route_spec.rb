@@ -75,4 +75,11 @@ RSpec.describe Route, type: :model do
     expect(routes.map(&:route_name)).to eql ["50", "56", "72"]
   end
 
+  it 'should find routes referenced by stops' do
+    stops = Stop.where_near(41.91058122516316, -87.67737865447998, 250)
+    routes = Route.referenced_by(stops)
+    expect(routes.map(&:route_name)).to eql ["50", "56", "72"]
+  end
+
+
 end
