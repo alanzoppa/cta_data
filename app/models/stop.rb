@@ -2,25 +2,22 @@ class Stop < ApplicationRecord
   belongs_to :street
   has_and_belongs_to_many :routes
 
-  def self.where_near(latitude, longitude, radius) # radius in meters
+  scope :where_near, ->(latitude, longitude, radius) do
 
     # earth_box uses the indices, but earth_distance gives the real answer
     # earth_box is just constraining the set that earth_distance operates
     # against
 
-    Stop.includes(:street, :routes).order('cross_street ASC').where(
+    includes(:street, :routes).order('cross_street ASC').where(
       %{
       earth_box( ll_to_earth(latitude, longitude), ?) @> ll_to_earth(?, ?) AND
       earth_distance( ll_to_earth(latitude, longitude), ll_to_earth(?, ?)) < ? 
       }, radius, latitude, longitude, latitude, longitude, radius
     )
-
   end
 
   def self.where_route_is(route_name)
-    Route.includes(:stops).find_by_route_name(
-      route_name
-    ).stops.includes(:street, :routes).order('stops.cross_street ASC')
+    Route.stops_by_route_name(route_name)
   end
 
   def self.distance_between(x1, y1, x2, y2)
