@@ -39,7 +39,7 @@ class Route < ApplicationRecord
   def farthest_stops_from_to_object(*args)
     o = farthest_stops_from(*args)
     o[:farthest] = o[:farthest].to_object
-    o[:farthest_fro_farthest] = o[:farthest_fro_farthest].to_object
+    o[:farthest_from_farthest] = o[:farthest_from_farthest].to_object
     o
   end
 

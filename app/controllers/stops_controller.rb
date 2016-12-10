@@ -11,7 +11,11 @@ class StopsController < ApplicationController
     respond_to do |format|
       format.html
       format.json {
-        render json: { stops: stops.map {|s| s.to_object} }
+        render json: {
+          stops: stops.map {|s| s.to_object},
+          routes:
+            Stop.farthest_from_point_by_route( latitude = permitted[:latitude].to_f, longitude = permitted[:longitude].to_f, as_object = true)
+        }
       }
     end
   end
@@ -25,3 +29,6 @@ class StopsController < ApplicationController
     render json: {stops: stops.map {|s| s.to_object}}
   end
 end
+
+
+
