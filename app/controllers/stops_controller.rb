@@ -21,7 +21,7 @@ class StopsController < ApplicationController
   end
 
   def stops_for_route
-    stops = Route.includes(:stops).find_by_route_name(params[:route_name]).stops.includes(:street, :routes)
+    stops = Stop.where_route_is params[:route_name]
     render json: {stops: stops.map {|s| s.to_object}}
   end
 end

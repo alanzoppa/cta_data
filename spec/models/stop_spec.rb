@@ -27,9 +27,13 @@ RSpec.describe Stop, type: :model do
       ].sort
     )
   end
+
   it "should be able to calculate the distance between any two points" do
-    s1 = Stop.first
-    s2 = Stop.all[1]
-    puts s1.distance_from(s2)
+    x1, y1 = [ -87.80400037765503, 41.909048226302026 ]
+    x2, y2 = [ -87.79699444770813, 41.9091679931638 ]
+    binding.pry
+    #s1 = Stop.first
+    #s2 = Stop.all[1]
+    #expect(s1.distance_from(s2)).to eql 2609.6526384819
   end
 end

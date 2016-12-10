@@ -35,6 +35,9 @@ RSpec.describe Route, type: :model do
         41.91027925, 41.91022104, 41.90998862, 41.91036162
       ].sort
     )
-    #binding.pry
   end
+
+  #it 'identifies east-west routes' do
+    #expect( Route.is_east_west?(72) ).to be true
+  #end
 end
