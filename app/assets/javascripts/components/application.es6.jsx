@@ -14,7 +14,7 @@ class Application extends React.Component {
 
     switch(true) {
       case (p.latitude && p.longitude && p.latitude != s.latitude && p.longitude != s.longitude):
-        return loadAdjacentStops(p.longitude, p.latitude);
+        return loadAdjacentStops(p.latitude, p.longitude);
       case (p.route && p.route != s.route):
         return $.get(`/stops/route/${p.route}`)
       case (p.stop_id && p.stop_id != s.stop_id):

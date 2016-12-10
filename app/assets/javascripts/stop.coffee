@@ -14,4 +14,4 @@
 
 
   @map.addListener 'click', (click)->
-    window.location.hash = "#/point/#{click.latLng.lng()}/#{click.latLng.lat()}"
+    window.location.hash = "#/point/#{click.latLng.lat()}/#{click.latLng.lng()}"

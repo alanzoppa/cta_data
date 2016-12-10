@@ -17,7 +17,7 @@ var createMarker = (latlon, title, content) => {
   } 
 
 
-var loadAdjacentStops = (longitude, latitude, radius)=> {
+var loadAdjacentStops = (latitude, longitude, radius)=> {
   radius = radius || 250;
   longitude = parseFloat(longitude);
   latitude = parseFloat(latitude);
