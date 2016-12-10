@@ -37,7 +37,23 @@ RSpec.describe Route, type: :model do
     )
   end
 
-  #it 'identifies east-west routes' do
-    #expect( Route.is_east_west?(72) ).to be true
-  #end
+  it 'identifies east-west routes' do
+    r = Route.find_by_route_name('72')
+    expect( r.is_east_west? ).to be true
+  end
+
+  it 'identifies north-south routes' do
+    r = Route.find_by_route_name('50')
+    expect( r.is_north_south? ).to be true
+  end
+
+  it 'measures route deltas' do
+    r1 = Route.find_by_route_name('72')
+    expect(r1.send :north_south_delta).to eql 290.205757019844
+    expect(r1.send :east_west_delta).to eql 14457.2183129063
+
+    r2 = Route.find_by_route_name('50')
+    expect(r2.send :north_south_delta).to eql 17479.6305880011
+    expect(r2.send :east_west_delta).to eql 1015.69269365224
+  end
 end

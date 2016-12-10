@@ -34,12 +34,12 @@ RSpec.describe Stop, type: :model do
 
   it "should be able to calculate the distance between any two points" do
     expect( Stop.distance_between(@x1,@y1,@x2,@y2) ).to eql 571.770407483036
-  end 
+  end
 
   it "should be able to calculate the distance between any two points" do
     stop1 = Stop.where_near(@x1,@y1,1).first
     stop2 = Stop.where_near(@x2,@y2,1).first
-    expect( stop.distance_from(stop2) ).to eql 571.770407483036
+    expect( stop1.distance_from(stop2) ).to eql 571.770407483036
   end
 
 end

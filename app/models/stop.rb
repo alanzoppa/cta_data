@@ -11,22 +11,30 @@ class Stop < ApplicationRecord
     includes(:street, :routes).order('cross_street ASC').where(
       %{
       earth_box( ll_to_earth(latitude, longitude), ?) @> ll_to_earth(?, ?) AND
-      earth_distance( ll_to_earth(latitude, longitude), ll_to_earth(?, ?)) < ? 
+      earth_distance( ll_to_earth(latitude, longitude), ll_to_earth(?, ?)) < ?
       }, radius, latitude, longitude, latitude, longitude, radius
     )
+  end
+
+  scope :north_to_south, -> do
+    order('stops.latitude DESC')
+  end
+
+  scope :east_to_west, -> do
+    order('stops.longitude DESC')
   end
 
   def self.where_route_is(route_name)
     Route.stops_by_route_name(route_name)
   end
 
-  def self.distance_between(x1, y1, x2, y2)
-    x1, y1, x2, y2 = [ x1, y1, x2, y2 ].map(&:to_f)
+  def self.distance_between(lat1, long1, lat2, long2)
+    lat1, long1, lat2, long2 = [ lat1, long1, lat2, long2 ].map(&:to_f)
     ActiveRecord::Base.connection.execute(
       %{
         SELECT earth_distance(
-          ll_to_earth(#{x1}, #{y1}),
-          ll_to_earth(#{x2}, #{y2})
+          ll_to_earth(#{lat1}, #{long1}),
+          ll_to_earth(#{lat2}, #{long2})
           )
       }
       ).first["earth_distance"]

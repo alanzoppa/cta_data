@@ -2,18 +2,57 @@ class Route < ApplicationRecord
   has_and_belongs_to_many :stops
 
   scope :stops_by_route_name, ->(route_name) do
-    includes(:stops).find_by_route_name(route_name.to_s).stops.includes(:street, :routes)
+    includes(:stops).find_by_route_name(
+      route_name.to_s
+    ).stops.includes(:street, :routes)
   end
 
-  def self.find_direction route_name
-    ns = Route.stops_by_route_name(route_name).sort_by {|r| r.longitude}
-    ew = Route.stops_by_route_name(route_name).sort_by {|r| r.latitude}
-    ns_delta = ns[0].longitude - ns[-1].longitude
-    ew_delta = ew[0].latitude - ew[-1].latitude
-    binding.pry
+  def get_direction
+    return north_south_delta > east_west_delta ? :"north-south" : :"east-west"
   end
 
-  def self.is_east_west? route_name
-    self.find_direction route_name
-  end 
+  def is_north_south?
+    get_direction == :"north-south"
+  end
+
+  def is_east_west?
+    get_direction == :"east-west"
+  end
+
+  private
+
+  def stops_north_to_south
+    @ns ||= Route.stops_by_route_name(route_name).north_to_south
+  end
+
+  def stops_east_to_west
+    @ew ||= Route.stops_by_route_name(route_name).east_to_west
+  end
+
+  def default_longitude
+    @default_longitude ||= stops_east_to_west.average(:longitude)
+  end
+
+  def default_latitude
+    @default_latitude ||= stops_north_to_south.average(:latitude)
+  end
+
+  def north_south_delta
+    Stop.distance_between(
+      stops_north_to_south.first.latitude,
+      default_longitude,
+      stops_north_to_south.last.latitude,
+      default_longitude,
+    )
+  end
+
+  def east_west_delta
+    Stop.distance_between(
+      default_latitude,
+      stops_east_to_west.first.longitude,
+      default_latitude,
+      stops_east_to_west.last.longitude,
+    )
+  end
+
 end
