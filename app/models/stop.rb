@@ -24,6 +24,30 @@ class Stop < ApplicationRecord
     order('stops.longitude DESC')
   end
 
+  scope :by_distance_from, ->(*args) do
+    latitude, longitude = Stop.stop_or_points_to_safe_points(*args)
+    order("earth_distance( ll_to_earth(stops.latitude, stops.longitude), ll_to_earth(#{latitude}, #{longitude})) ASC")
+  end
+
+  def self.stop_or_points_to_safe_points *args
+    validation_message = "Input should be a Stop or just x and y"
+    case(args.length)
+    when 1
+      unless args[0].is_a? Stop
+        raise validation_message
+      end
+      points = [ args[0].latitude, args[0].longitude ]
+    when 2
+      unless (points = args.map(&:to_f))
+        raise validation_message
+      end
+      points = args
+    else
+      raise validation_message
+    end
+    return points
+  end
+
   def self.where_route_is(route_name)
     Route.stops_by_route_name(route_name)
   end

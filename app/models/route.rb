@@ -1,3 +1,5 @@
+require 'timeout'
+
 class Route < ApplicationRecord
   has_and_belongs_to_many :stops
 
@@ -17,6 +19,21 @@ class Route < ApplicationRecord
 
   def is_east_west?
     get_direction == :"east-west"
+  end
+
+  def farthest_stops_from(*args)
+    #This implementation is NP-Hard 
+    Timeout::timeout(5) do
+      latitude, longitude = Stop.stop_or_points_to_safe_points(*args)
+      farthest = self.stops.by_distance_from(*args).last
+      farthest_from_farthest = self.stops.by_distance_from(farthest).last
+      HashWithIndifferentAccess.new({
+        origin: {latitude: latitude, longitude: longitude},
+        farthest: farthest,
+        farthest_from_farthest: farthest_from_farthest,
+        distance_between: farthest.distance_from(farthest_from_farthest)
+      })
+    end
   end
 
   private
@@ -54,5 +71,7 @@ class Route < ApplicationRecord
       stops_east_to_west.last.longitude,
     )
   end
+
+
 
 end

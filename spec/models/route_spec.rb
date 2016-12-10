@@ -56,4 +56,16 @@ RSpec.describe Route, type: :model do
     expect(r2.send :north_south_delta).to eql 17479.6305880011
     expect(r2.send :east_west_delta).to eql 1015.69269365224
   end
+
+  it 'finds the most distant stops' do
+    latitude = 41.91058122516316
+    longitude = -87.67737865447998 
+    r1 = Route.find_by_route_name('72')
+    farthest_stops = r1.farthest_stops_from(latitude, longitude)
+    expect( farthest_stops[:farthest].cross_street ).to eql "WABANSIA"
+    expect( farthest_stops[:farthest_from_farthest].cross_street ).to eql "CLARK"
+    expect( farthest_stops[:distance_between] ).to eql 14457.2494763013
+    expect( farthest_stops[:origin][:latitude] ).to eql latitude
+    expect( farthest_stops[:origin][:longitude] ).to eql longitude
+  end
 end
