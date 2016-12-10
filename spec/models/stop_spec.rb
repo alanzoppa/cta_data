@@ -8,7 +8,7 @@ RSpec.describe Stop, type: :model do
   end
   it "should gather points in an arbitrary radius of a given point" do
     stops = Stop.where_near(41.881128434236246,-87.6321029663086,250)
-    expect(stops.map {|s| [s.latitude.to_f, s.longitude.to_f]}).to eql(
+    expect(stops.map {|s| [s.latitude.to_f, s.longitude.to_f]}.sort).to eql(
       [
         [41.879426, -87.634024],
         [41.883137, -87.632625],
@@ -24,7 +24,12 @@ RSpec.describe Stop, type: :model do
         [41.88062407, -87.63249507],
         [41.8813809, -87.6309716],
         [41.87947219, -87.6311045]
-      ]
+      ].sort
     )
+  end
+  it "should be able to calculate the distance between any two points" do
+    s1 = Stop.first
+    s2 = Stop.all[1]
+    puts s1.distance_from(s2)
   end
 end

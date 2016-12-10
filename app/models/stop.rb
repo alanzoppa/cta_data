@@ -18,6 +18,17 @@ class Stop < ApplicationRecord
 
   end
 
+  def distance_from(other)
+    ActiveRecord::Base.connection.execute(
+      %{
+        SELECT earth_distance(
+          ll_to_earth(#{self.latitude}, #{self.longitude}),
+          ll_to_earth(#{other.latitude}, #{other.longitude})
+          )
+      }
+      ).first["earth_distance"]
+  end
+
   def to_object
     {
       id: self.id,

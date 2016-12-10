@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Route, type: :model do
   it "should return all the stops along a route" do
     stops = Route.stops_by_route_name('72')
-    expect(stops.map {|s| s.latitude.to_f}).to eql(
+    expect(stops.map {|s| s.latitude.to_f}.sort).to eql(
       [
         41.909026, 41.90883939, 41.9089, 41.90897029, 41.90899595, 41.908996,
         41.90900079, 41.909098, 41.90910983, 41.90919299, 41.90917318,
@@ -33,7 +33,7 @@ RSpec.describe Route, type: :model do
         41.91017528, 41.90915677, 41.90989259, 41.90919935, 41.91102555,
         41.91069828, 41.91001533, 41.91067122, 41.91079739, 41.91033711,
         41.91027925, 41.91022104, 41.90998862, 41.91036162
-      ]
+      ].sort
     )
     #binding.pry
   end

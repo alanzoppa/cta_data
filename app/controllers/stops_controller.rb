@@ -25,7 +25,3 @@ class StopsController < ApplicationController
     render json: {stops: stops.map {|s| s.to_object}}
   end
 end
-
-
-
-
