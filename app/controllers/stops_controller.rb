@@ -11,7 +11,7 @@ class StopsController < ApplicationController
     respond_to do |format|
       format.html
       format.json {
-        render json: {stops: stops.map {|s| s.to_object}}
+        render json: { stops: stops.map {|s| s.to_object} }
       }
     end
   end

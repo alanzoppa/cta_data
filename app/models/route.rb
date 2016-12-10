@@ -36,6 +36,13 @@ class Route < ApplicationRecord
     end
   end
 
+  def farthest_stops_from_to_object
+    o = farthest_stops_from
+    o[:farthest] = o[:farthest].to_object
+    o[:farthest_fro_farthest] = o[:farthest_fro_farthest].to_object
+    o
+  end
+
   private
 
   def stops_north_to_south
