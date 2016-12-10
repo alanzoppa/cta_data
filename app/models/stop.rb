@@ -29,6 +29,18 @@ class Stop < ApplicationRecord
     order("earth_distance( ll_to_earth(stops.latitude, stops.longitude), ll_to_earth(#{latitude}, #{longitude})) ASC")
   end
 
+  def self.farthest_from_point_by_route(latitude, longitude, as_object=false, radius=250)
+    method = as_object ? :farthest_stops_from_to_object : :farthest_stops_from
+    stops = Stop.where_near(latitude, longitude, radius)
+    routes = Route.referenced_by(stops)
+    routes.map do |route|
+      {
+        route_name: route.route_name,
+        stops: route.send(method, latitude, longitude)
+      }
+    end
+  end
+
   def self.stop_or_points_to_safe_points *args
     validation_message = "Input should be a Stop or just x and y"
     case(args.length)

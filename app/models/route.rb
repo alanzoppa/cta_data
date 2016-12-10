@@ -25,8 +25,8 @@ class Route < ApplicationRecord
     #This implementation is NP-Hard 
     Timeout::timeout(5) do
       latitude, longitude = Stop.stop_or_points_to_safe_points(*args)
-      farthest = self.stops.by_distance_from(*args).last
-      farthest_from_farthest = self.stops.by_distance_from(farthest).last
+      farthest = self.stops.by_distance_from(*args).to_a.last
+      farthest_from_farthest = self.stops.by_distance_from(farthest).to_a.last
       HashWithIndifferentAccess.new({
         origin: {latitude: latitude, longitude: longitude},
         farthest: farthest,
@@ -36,11 +36,16 @@ class Route < ApplicationRecord
     end
   end
 
-  def farthest_stops_from_to_object
-    o = farthest_stops_from
+  def farthest_stops_from_to_object(*args)
+    o = farthest_stops_from(*args)
     o[:farthest] = o[:farthest].to_object
     o[:farthest_fro_farthest] = o[:farthest_fro_farthest].to_object
     o
+  end
+
+  def self.referenced_by(stops)
+    route_ids = stops.map(&:route_ids).flatten.uniq
+    Route.where(id: route_ids)
   end
 
   private

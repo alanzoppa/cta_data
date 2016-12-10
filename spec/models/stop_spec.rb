@@ -42,4 +42,13 @@ RSpec.describe Stop, type: :model do
     expect( stop1.distance_from(stop2) ).to eql 571.770407483036
   end
 
+  it 'should find farthest stops from points' do
+    stops = Stop.farthest_from_point_by_route(41.91058122516316, -87.67737865447998)
+    expect(stops.map(&:keys)).to eql(
+      [[:route_name, :stops], [:route_name, :stops], [:route_name, :stops]]
+    )
+  end
+
+
+
 end

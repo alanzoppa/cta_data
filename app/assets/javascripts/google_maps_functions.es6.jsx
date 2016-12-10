@@ -28,7 +28,7 @@ var loadAdjacentStops = (latitude, longitude, radius)=> {
       latitude: latitude,
       radius: radius
     }
-  ) 
+  );
 }
 
 var populateMarkers = (stops)=> {
