@@ -5,6 +5,10 @@ RSpec.describe Stop, type: :model do
     if Route.count == 0
       raise "please run `RAILS_ENV='test' bundle exec rake import_csvs`"
     end
+
+    @x1, @y1 = [ 41.909026, -87.80401 ]
+    @x2, @y2 = [ 41.90911634, -87.79710938 ]
+
   end
   it "should gather points in an arbitrary radius of a given point" do
     stops = Stop.where_near(41.881128434236246,-87.6321029663086,250)
@@ -29,11 +33,13 @@ RSpec.describe Stop, type: :model do
   end
 
   it "should be able to calculate the distance between any two points" do
-    x1, y1 = [ -87.80400037765503, 41.909048226302026 ]
-    x2, y2 = [ -87.79699444770813, 41.9091679931638 ]
-    binding.pry
-    #s1 = Stop.first
-    #s2 = Stop.all[1]
-    #expect(s1.distance_from(s2)).to eql 2609.6526384819
+    expect( Stop.distance_between(@x1,@y1,@x2,@y2) ).to eql 571.770407483036
+  end 
+
+  it "should be able to calculate the distance between any two points" do
+    stop1 = Stop.where_near(@x1,@y1,1).first
+    stop2 = Stop.where_near(@x2,@y2,1).first
+    expect( stop.distance_from(stop2) ).to eql 571.770407483036
   end
+
 end
