@@ -33,14 +33,11 @@ var loadAdjacentStops = (latitude, longitude, radius)=> {
 
 var populateMarkers = (stops)=> {
   for (var stop of stops) {
-      var markerLatlng = new google.maps.LatLng(
+      const markerLatlng = new google.maps.LatLng(
         stop.location[0], stop.location[1]
       );
-      var title = stop.street;
-      var routeLinks = stop.routes.map(
-        (r)=> { return `<a href="#/route/${r}">#${r}</a>` }
-      );
-      var content = `${stop.street}: ${routeLinks.join(', ')}`
+      const title = stop.street;
+      const content = `<a href="#/stops/${stop.id}">${stop.street} at ${stop.cross_street}</a>`;
       window.markers.push(
         createMarker(markerLatlng, title, content)
       ) 

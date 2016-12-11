@@ -46,11 +46,16 @@ class Application extends React.Component {
     window.map.panTo(point);
   }
 
-  render () {
+  setupMap() {
     clearMarkers();
     populateMarkers(this.state.stops);
     if (this.state.center) {this.setCenter(...this.state.center)};
     if (this.state.zoom) {window.map.setZoom(this.state.zoom)};
+  }
+
+  render () {
+    this.setupMap();
+    console.log(this);
     return <Panel
       params={this.props.params}
       stops={this.state.stops}
