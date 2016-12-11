@@ -19,6 +19,11 @@ class Radius extends Application {
 
   render () {
     this.setupMap();
-    return <section id="panel"><GenericStopList stops={this.state.stops} /></section>;
+    return (
+        <section id="panel">
+          <h4>Stops within 250 meters of {this.props.params.latitude}, {this.props.params.longitude}</h4>
+          <GenericStopList stops={this.state.stops} />
+        </section>
+        )
  } 
 }

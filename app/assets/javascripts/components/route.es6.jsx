@@ -14,6 +14,11 @@ class Route extends Application {
 
   render () {
     this.setupMap();
-    return <section id="panel"><GenericStopList stops={this.state.stops} /></section>;
+    return (
+      <section id="panel">
+        <h4>Stops on Route #{this.props.params.route}</h4>
+        <GenericStopList stops={this.state.stops} />
+      </section>
+    )
   } 
 }
