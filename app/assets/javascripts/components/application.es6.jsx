@@ -55,7 +55,6 @@ class Application extends React.Component {
 
   render () {
     this.setupMap();
-    console.log(this);
     return <Panel
       params={this.props.params}
       stops={this.state.stops}

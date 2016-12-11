@@ -10,4 +10,14 @@ class SingleStop extends Application {
       return $.get(`/stops/${stop_id}`);
     }
   }
+
+  render () {
+    this.setupMap();
+    return <section id="panel"><RouteData route_info={this.state.route_info} stop={this.state.stops[0]} /></section>
+  }
+
 }
+
+
+
+

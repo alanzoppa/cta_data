@@ -1,7 +1,11 @@
 class Radius extends Application {
 
   handleData(data) {
-    this.setState({center: [this.props.params.latitude, this.props.params.longitude]})
+    this.setState(
+        {
+          center: [this.props.params.latitude, this.props.params.longitude],
+          zoom: 14
+        })
   } 
 
   getPoints() {
@@ -13,4 +17,8 @@ class Radius extends Application {
        ) { return loadAdjacentStops( latitude, longitude) }
   }
 
+  render () {
+    this.setupMap();
+    return <section id="panel"><GenericStopList stops={this.state.stops} /></section>;
+ } 
 }

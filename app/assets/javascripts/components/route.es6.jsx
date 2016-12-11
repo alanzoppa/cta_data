@@ -11,4 +11,9 @@ class Route extends Application {
       return $.get(`/stops/route/${route}`)
     }
   }
+
+  render () {
+    this.setupMap();
+    return <section id="panel"><GenericStopList stops={this.state.stops} /></section>;
+  } 
 }
