@@ -8,6 +8,16 @@ html, body {
   padding: 0;
 }
 
+dl {
+  dt {
+    float: left;
+    clear: left;
+    padding-right: 10px;
+    font-weight: bold;
+    &:after {content: ': '; }
+  }
+}
+
 div[data-react-class=AppRouter] {
   height: 100%;
   float: left;
@@ -40,7 +50,15 @@ ul.route-links {
 }
 
 .route-datum {
-  &:not(:last-child) {
+  .distant-stop {
     margin-bottom: 10px;
   }
+
+  &:not(:last-child) {
+    margin-bottom: 30px;
+  }
+}
+
+.stop-delta-info {
+  margin-left: 20px;
 }
