@@ -22,14 +22,26 @@ class Route < ApplicationRecord
   end
 
   def farthest_stops_from(*args)
-    #This implementation is NP-Hard 
-    Timeout::timeout(5) do
+    Timeout::timeout(5) do #This implementation is NP-Hard 
       latitude, longitude = Stop.stop_or_points_to_safe_points(*args)
       farthest = self.stops.by_distance_from(*args).to_a.last
       farthest_from_farthest = self.stops.by_distance_from(farthest).to_a.last
+
       HashWithIndifferentAccess.new({
         origin: {latitude: latitude, longitude: longitude},
         farthest: farthest,
+        meters_to_farthest: Stop.distance_between(
+          farthest.latitude,
+          farthest.longitude,
+          latitude,
+          longitude
+        ),
+        meters_to_farthest_from_farthest: Stop.distance_between(
+          farthest_from_farthest.latitude,
+          farthest_from_farthest.longitude,
+          latitude,
+          longitude
+        ),
         farthest_from_farthest: farthest_from_farthest,
         distance_between: farthest.distance_from(farthest_from_farthest)
       })

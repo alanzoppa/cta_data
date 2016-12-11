@@ -45,7 +45,7 @@ class Stop < ApplicationRecord
     routes.map do |route|
       {
         route_name: route.route_name,
-        stops: route.send(method, latitude, longitude)
+        route_farthest_stops: route.send(method, latitude, longitude)
       }
     end
   end

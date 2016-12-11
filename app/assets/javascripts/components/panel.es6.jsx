@@ -1,13 +1,12 @@
 class Panel extends React.Component {
   render () {
-    console.log(this.props.params)
     return (
-        <div id="panel">
+        <section id="panel">
+          <RouteData route_info={this.props.route_info} stop={stop[0]} />
           <ul>
             {this.props.stops.map((stop)=> <Stop {...stop} key={stop.id} /> )}
           </ul>
-        </div>
+        </section>
         )
   }
 }
-

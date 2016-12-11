@@ -20,13 +20,6 @@ class StopsController < ApplicationController
     stop = Stop.find(params[:id])
     route_info = Stop.farthest_from_point_by_route(stop: stop, as_object: true)
 
-    #route_info.each do |r|
-      #[:farthest, :farthest_from_farthest].each do |m|
-        #if stop = r.dig(:stops, m)
-          #stops.push(stop)
-        #end
-      #end
-    #end
     render json: {
       stops: [stop.to_object],
       route_info: route_info
