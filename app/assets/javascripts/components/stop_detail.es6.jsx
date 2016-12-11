@@ -1,4 +1,12 @@
-class DistantStop extends React.Component {
+class StopDetail extends React.Component {
+  propTypes: {
+    street: React.PropTypes.string,
+    cross_street: React.PropTypes.string,
+    location: React.PropTypes.array,
+    origin: React.PropTypes.array,
+    id: React.PropTypes.node
+  }
+
   render () {
     const stopHref = `#/stops/${this.props.id}`;
 
@@ -15,10 +23,5 @@ class DistantStop extends React.Component {
   }
 }
 
-DistantStop.propTypes = {
-  street: React.PropTypes.string,
-  cross_street: React.PropTypes.string,
-  location: React.PropTypes.array,
-  origin: React.PropTypes.array,
-  id: React.PropTypes.node
-};
+
+

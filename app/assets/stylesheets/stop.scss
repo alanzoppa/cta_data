@@ -8,16 +8,6 @@ html, body {
   padding: 0;
 }
 
-dl {
-  dt {
-    float: left;
-    clear: left;
-    padding-right: 10px;
-    font-weight: bold;
-    &:after {content: ': '; }
-  }
-}
-
 div[data-react-class=AppRouter] {
   height: 100%;
   float: left;
@@ -61,4 +51,14 @@ ul.route-links {
 
 .stop-delta-info {
   margin-left: 20px;
+}
+
+ul.dictionary-list {
+  list-style-type: none;
+  padding: 0;
+  span.term {
+    padding-right: 10px;
+    font-weight: bold;
+    &:after {content: ': '; }
+  }
 }
