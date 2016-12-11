@@ -1,11 +1,5 @@
-var DeltaInfo = React.createClass({
-  propTypes: {
-    location: React.PropTypes.array,
-    origin: React.PropTypes.array,
-    distance: React.PropTypes.number
-  },
-
-  render: function() {
+class DeltaInfo extends React.Component {
+  render() {
     const pointHref = `#/point/${this.props.location[0]}/${this.props.location[1]}`;
     if (this.props.location && this.props.distance) {
       return (
@@ -17,4 +11,13 @@ var DeltaInfo = React.createClass({
     }
     return null;
   }
-});
+};
+
+
+DeltaInfo.propTypes = {
+  location: React.PropTypes.array,
+  origin: React.PropTypes.array,
+  distance: React.PropTypes.number
+}
+
+

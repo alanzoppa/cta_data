@@ -1,9 +1,5 @@
-var DictionaryEntry = React.createClass({
-  propTypes: {
-    term: React.PropTypes.string,
-  },
-
-  render: function() {
+class DictionaryEntry extends React.Component {
+  render() {
     if (this.props.term && this.props.definition) {
       return (
         <li>
@@ -14,4 +10,10 @@ var DictionaryEntry = React.createClass({
     }
     return null;
   }
-});
+};
+
+DictionaryEntry.propTypes = {
+  term: React.PropTypes.string,
+}
+
+
