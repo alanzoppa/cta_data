@@ -8,20 +8,6 @@ class StopsController < ApplicationController
       permitted[:radius].to_f,
     ).map {|s| s.to_object}
 
-    #route_info = Stop.farthest_from_point_by_route(
-      #latitude = permitted[:latitude].to_f,
-      #longitude = permitted[:longitude].to_f,
-      #as_object = true
-    #)
-
-    #route_info.each do |r|
-      #[:farthest, :farthest_from_farthest].each do |m|
-        #if stop = r.dig(:stops, m)
-          #stops.push(stop)
-        #end
-      #end
-    #end
-
     respond_to do |format|
       format.html
       format.json {
@@ -31,7 +17,20 @@ class StopsController < ApplicationController
   end
 
   def show
-    render json: {stops: [Stop.find(params[:id]).to_object]}
+    stop = Stop.find(params[:id])
+    route_info = Stop.farthest_from_point_by_route(stop: stop, as_object: true)
+
+    #route_info.each do |r|
+      #[:farthest, :farthest_from_farthest].each do |m|
+        #if stop = r.dig(:stops, m)
+          #stops.push(stop)
+        #end
+      #end
+    #end
+    render json: {
+      stops: [stop.to_object],
+      route_info: route_info
+    }
   end
 
   def stops_for_route

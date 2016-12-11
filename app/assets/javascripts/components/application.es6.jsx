@@ -41,6 +41,10 @@ class Application extends React.Component {
   render () {
     clearMarkers();
     populateMarkers(this.state.stops);
-    return <Panel stops={this.state.stops} route_info={this.state.route_info}/>;
+    return <Panel
+      params={this.props.params}
+      stops={this.state.stops}
+      route_info={this.state.route_info}
+    />;
   }
 }
