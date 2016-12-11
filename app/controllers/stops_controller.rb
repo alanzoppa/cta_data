@@ -8,11 +8,11 @@ class StopsController < ApplicationController
       permitted[:radius].to_f,
     ).map {|s| s.to_object}
 
-    route_info = Stop.farthest_from_point_by_route(
-      latitude = permitted[:latitude].to_f,
-      longitude = permitted[:longitude].to_f,
-      as_object = true
-    )
+    #route_info = Stop.farthest_from_point_by_route(
+      #latitude = permitted[:latitude].to_f,
+      #longitude = permitted[:longitude].to_f,
+      #as_object = true
+    #)
 
     #route_info.each do |r|
       #[:farthest, :farthest_from_farthest].each do |m|
@@ -25,10 +25,7 @@ class StopsController < ApplicationController
     respond_to do |format|
       format.html
       format.json {
-        render json: {
-          stops: stops,
-          route_info: route_info
-        }
+        render json: { stops: stops, }
       }
     end
   end
