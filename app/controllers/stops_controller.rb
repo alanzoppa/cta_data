@@ -30,6 +30,12 @@ class StopsController < ApplicationController
     stops = Stop.where_route_is params[:route_name]
     render json: {stops: stops.map {|s| s.to_object}}
   end
+
+  def by_route_count
+    stops = Stop.joins(:street, :routes).select("streets.street_name, cross_street, longitude, latitude,(SELECT count(route_id) from routes_stops WHERE routes_stops.stop_id = stops.id) as count_of_stops").order('count_of_stops DESC')
+    render json: {stops: stops.as_json(except: [:id])}
+  end
+
 end
 
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161207062839) do
+ActiveRecord::Schema.define(version: 20161211234901) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20161207062839) do
     t.string  "cross_street"
     t.index ["latitude"], name: "index_stops_on_latitude", using: :btree
     t.index ["longitude"], name: "index_stops_on_longitude", using: :btree
+    t.index ["street_id"], name: "index_stops_on_street_id", using: :btree
   end
 
   create_table "streets", force: :cascade do |t|
