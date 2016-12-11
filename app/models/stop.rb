@@ -84,12 +84,12 @@ class Stop < ApplicationRecord
   end
 
   def to_object
-    {
+    HashWithIndifferentAccess.new({
       id: self.id,
       location: [self.latitude.to_f, self.longitude.to_f],
       street: self.street.street_name,
       cross_street: self.cross_street,
       routes: self.routes.map(&:route_name)
-    }
+    })
   end
 end
