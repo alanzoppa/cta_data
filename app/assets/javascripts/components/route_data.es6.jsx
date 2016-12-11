@@ -3,7 +3,8 @@ class RouteData extends React.Component {
     if (this.props.stop) {
       return (
         <div>
-          <StopDetail {...this.props.stop} />
+          <h3>Stop Detail</h3>
+          <ul className='stop-list'><StopDetail {...this.props.stop} /></ul>
           <div>{this.props.route_info.map(
             (route)=> <RouteDatum
               {...route}

@@ -9,16 +9,20 @@ class StopDetail extends React.Component {
 
   render () {
     const stopHref = `#/stops/${this.props.id}`;
+    const pointHref = `#/point/${this.props.location[0]}/${this.props.location[1]}`;
 
     return (
-      <div className='distant-stop'>
-        <p>
-          <a href={stopHref}>
-            {this.props.street} at {this.props.cross_street}
-          </a>
-        </p>
-        <DeltaInfo location={this.props.location} distance = {this.props.distance} />
-      </div>
+      <li className='stop-detail'>
+        <a href={stopHref} className='stop-cross-street'>
+          {this.props.street} at {this.props.cross_street}
+        </a>
+
+        <ul className='dictionary-list stop-delta-info'>
+          <DictionaryEntry term="Routes" definition={<RouteList routes={this.props.routes} />} />
+          <DictionaryEntry term="Location" definition={<a href={pointHref}>{this.props.location.length == 2 && this.props.location.join(', ')}</a>} />
+          <DictionaryEntry term="Distance" definition={this.props.distance && this.props.distance.round(2)} />
+        </ul>
+      </li>
     );
   }
 }

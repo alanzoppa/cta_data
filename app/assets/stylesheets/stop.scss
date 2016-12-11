@@ -40,10 +40,6 @@ ul.route-links {
 }
 
 .route-datum {
-  .distant-stop {
-    margin-bottom: 10px;
-  }
-
   &:not(:last-child) {
     margin-bottom: 30px;
   }
@@ -61,4 +57,27 @@ ul.dictionary-list {
     font-weight: bold;
     &:after {content: ': '; }
   }
+}
+
+ul.stop-list {
+  margin-left: 0;
+  padding-left: 5px;
+  list-style-type: none;
+  & > li {
+    margin-left: 0;
+    margin-bottom: 10px;
+  }
+  li.stop-cross-street {
+    font-weight: bold;
+  }
+  li span.term {
+    min-width: 75px;
+    float: left;
+  }
+}
+
+h4 {
+  display: block;
+  width: 100%;
+  border-bottom: 1px solid #000;
 }

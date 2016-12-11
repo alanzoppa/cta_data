@@ -2,7 +2,7 @@ class RouteDatum extends React.Component {
   render () {
     return (
       <div className='route-datum'>
-        <div>Route Name: {this.props.route_name}</div>
+        <h4>Route {this.props.route_name}</h4>
         <DistantStop
           {...this.props.route_farthest_stops.farthest}
           distance={this.props.route_farthest_stops.meters_to_farthest}

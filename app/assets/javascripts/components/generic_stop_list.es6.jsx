@@ -1,8 +1,8 @@
 class GenericStopList extends React.Component {
   render () {
     return (
-      <ul>
-        {this.props.stops.map((stop)=> <Stop {...stop} key={stop.id} /> )}
+      <ul className='stop-list'>
+        {this.props.stops.map((stop)=> <StopDetail {...stop} key={stop.id} /> )}
       </ul>
     );
   }
