@@ -1,9 +1,5 @@
 class Radius extends Application {
 
-  handleData(data) {
-    console.log(arguments);
-  }
-
   getPoints() {
     const latitude = this.props.params.latitude;
     const longitude = this.props.params.longitude;

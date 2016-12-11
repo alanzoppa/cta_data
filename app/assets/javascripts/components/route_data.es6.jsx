@@ -1,18 +1,15 @@
 class RouteData extends React.Component {
   render () {
-    if (this.props.route_info) {
-      return (
+    return (
         <div>
           <div>{this.props.route_info.map(
             (route)=> <RouteDatum
               {...route}
               stop={this.props.stop}
               key={route.route_name}
-              /> )}</div>
+            /> )}</div>
         </div>
         );
-    }
-    return null;
   }
 }
 
