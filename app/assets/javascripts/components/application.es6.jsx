@@ -1,7 +1,7 @@
 class Application extends React.Component {
   constructor() {
     super();
-    this.state = { stops: [] };
+    this.state = { stops: [], route_info: [] };
   }
 
   componentDidMount() { this.updateStops(); }
@@ -11,16 +11,9 @@ class Application extends React.Component {
   getPoints() {
     const s = this.state;
     const p = this.props.params;
-
-    switch(true) {
-      case (p.latitude && p.longitude && p.latitude != s.latitude && p.longitude != s.longitude):
-        return loadAdjacentStops(p.latitude, p.longitude);
-      case (p.route && p.route != s.route):
-        return $.get(`/stops/route/${p.route}`)
-      case (p.stop_id && p.stop_id != s.stop_id):
-        return $.get(`/stops/${this.props.params.stop_id}`);
-    }
   }
+
+  handleData(data) { return }
 
   updateStops() {
     const s = this.state;
@@ -33,19 +26,21 @@ class Application extends React.Component {
           longitude: p.longitude,
           stops: data.stops,
           route: p.route,
-          stop_id: p.stop_id
+          stop_id: p.stop_id,
+          route_info: data.route_info
         }
       );
+      return data;
     } 
     
     if (getPoints = this.getPoints()) {
-      getPoints.done(updateState)
+      getPoints.then(updateState).then(this.handleData)
     }
   }
 
   render () {
     clearMarkers();
     populateMarkers(this.state.stops);
-    return <Panel stops={this.state.stops} />;
+    return <Panel stops={this.state.stops} route_info={this.state.route_info}/>;
   }
 }

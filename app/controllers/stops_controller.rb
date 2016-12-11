@@ -13,7 +13,7 @@ class StopsController < ApplicationController
       format.json {
         render json: {
           stops: stops.map {|s| s.to_object},
-          routes:
+          route_info:
             Stop.farthest_from_point_by_route( latitude = permitted[:latitude].to_f, longitude = permitted[:longitude].to_f, as_object = true)
         }
       }
