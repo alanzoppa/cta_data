@@ -1,9 +1,9 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
-
-
 @markers = []
+
+# How is there not a better way to do this?
+# http://www.jacklmoore.com/notes/rounding-in-javascript/
+Number::round = (precision)->
+  Number(Math.round(this+'e'+precision)+'e-'+precision)
 
 @initMap = ->
   @map = new google.maps.Map(

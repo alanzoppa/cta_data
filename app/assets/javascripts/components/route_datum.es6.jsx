@@ -1,9 +1,13 @@
 class RouteDatum extends React.Component {
   render () {
-    console.log(this.props)
     return (
-      <div>
+      <div className='route-datum'>
         <div>Route Name: {this.props.route_name}</div>
+        <DistantStop
+          {...this.props.route_farthest_stops.farthest}
+          distance={this.props.route_farthest_stops.meters_to_farthest}
+          origin={this.props.stop.location}
+        />
       </div>
     );
   }
@@ -13,6 +17,3 @@ RouteDatum.propTypes = {
   route_name: React.PropTypes.string,
   stops: React.PropTypes.object
 };
-
-        //<div>Stops: {this.props.stops}</div>
-

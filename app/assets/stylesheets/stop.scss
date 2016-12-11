@@ -38,3 +38,9 @@ ul.route-links {
     }
   }
 }
+
+.route-datum {
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+}
