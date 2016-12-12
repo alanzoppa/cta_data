@@ -14,6 +14,10 @@ class StopDetail extends React.Component {
     let distance = (this.props.distance && this.props.distance.round(2));
     distance = distance ? `${distance} meters` : null
 
+    if (this.props.distanceRequired && !this.props.distance) {
+      return null;
+    }
+
     return (
       <li className='stop-detail'>
         <a href={stopHref} className='stop-cross-street'>

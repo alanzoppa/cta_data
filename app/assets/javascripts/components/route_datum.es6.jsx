@@ -12,6 +12,7 @@ class RouteDatum extends React.Component {
           <StopDetail
             {...this.props.route_farthest_stops.farthest_from_farthest}
             distance={this.props.route_farthest_stops.meters_to_farthest_from_farthest}
+            distanceRequired={true}
           /> 
         </ul>
       </div>

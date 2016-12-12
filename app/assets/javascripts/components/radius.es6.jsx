@@ -1,10 +1,11 @@
 class Radius extends Application {
 
   handleData(data) {
+    const currentZoom = window.map.getZoom();
     this.setState(
         {
           center: [this.props.params.latitude, this.props.params.longitude],
-          zoom: 14
+          zoom: currentZoom > 15 ? currentZoom : 15
         })
   } 
 
