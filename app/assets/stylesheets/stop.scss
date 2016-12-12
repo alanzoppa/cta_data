@@ -6,7 +6,47 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  /*font-family: Arial, Helvetica, sans-serif;*/
+  font-family: Verdana, Geneva, sans-serif;
+  color: #333;
 }
+
+$navy: #001F3F;
+$blue: #0074D9;
+$aqua: #7FDBFF;
+$teal: #39CCCC;
+$olive: #3D9970;
+$green: #2ECC40;
+$lime: #01FF70;
+$yellow: #FFDC00;
+$orange: #FF851B;
+$red: #FF4136;
+$fuch: #F012BE;
+$purple: #B10DC9;
+$maroon: #85144B;
+$white: #FFFFFF;
+$gray: #AAAAAA;
+$silver: #DDDDDD;
+$black: #111111;
+
+
+a {
+  transition: all .4s;
+  color: $blue;
+}
+
+a:link,
+a:visited { all : $blue; }
+a:hover   {
+  /*color: lighten($blue, 30);*/
+  /*color: lighten($blue, 30);*/
+  color: lighten($teal, 10);
+  }
+a:active  {
+  transition: all .3s;
+  color: darken($orange, 20);
+}
+
 
 div[data-react-class=AppRouter] {
   height: 100%;
@@ -14,6 +54,7 @@ div[data-react-class=AppRouter] {
 }
 
 #panel {
+  background-image: asset-url("map.jpg");
   width: 350px;
   height: 100vh;
   float: left;
@@ -57,11 +98,19 @@ a.route-link {
 }
 
 ul.dictionary-list {
+  margin: 3px 0 0 7px;
   list-style-type: none;
   padding: 0;
+  font-size: 13px;
+  li {
+    margin-bottom: 2px;
+  }
   span.term {
+    min-width: 65px;
+    float: left;
     padding-right: 10px;
     font-weight: bold;
+    color: #666;
     &:after {content: ': '; }
   }
 }
@@ -77,9 +126,14 @@ ul.stop-list {
   li.stop-cross-street {
     font-weight: bold;
   }
-  li span.term {
-    min-width: 75px;
-    float: left;
+}
+
+.stop-detail {
+  text-transform: lowercase;
+  a.stop-cross-street {
+    font-weight: bold;
+    font-style: italic;
+    font-size: 13px;
   }
 }
 

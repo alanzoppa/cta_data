@@ -25,9 +25,9 @@ class StopDetail extends React.Component {
         </a>
 
         <ul className='dictionary-list stop-delta-info'>
-          <DictionaryEntry term="Routes" definition={<RouteList routes={this.props.routes} />} />
           <DictionaryEntry term="Location" definition={<a href={pointHref}>{this.props.location.length == 2 && this.props.location.join(', ')}</a>} />
           <DictionaryEntry term="Distance" definition={distance} />
+          <DictionaryEntry term="Routes" definition={<RouteList routes={this.props.routes} />} />
         </ul>
       </li>
     );

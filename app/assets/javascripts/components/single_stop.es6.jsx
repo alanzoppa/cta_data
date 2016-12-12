@@ -13,7 +13,11 @@ class SingleStop extends Application {
 
   render () {
     this.setupMap();
-    return <section id="panel"><RouteData route_info={this.state.route_info} stop={this.state.stops[0]} /></section>
+    return (
+        <section id="panel">
+          <RouteData route_info={this.state.route_info} stop={this.state.stops[0]} />
+        </section>
+        )
   }
 
 }

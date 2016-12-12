@@ -3,7 +3,7 @@ class RouteList extends React.Component {
     return (
       <span className='route-links'>
         {this.props.routes.map((route)=> {
-          return(<a key={route} className='route-link' href={`#/route/${route}`}> {route}</a>)
+          return(<a key={route} className='route-link' href={`#/route/${route}`}>{route}</a>)
         })}
       </span>
     );
