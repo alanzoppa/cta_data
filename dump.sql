@@ -17,6 +17,7 @@ SET row_security = off;
 SET search_path = public, pg_catalog;
 
 ALTER TABLE ONLY public.stops DROP CONSTRAINT fk_rails_70b9869671;
+DROP INDEX public.index_stops_on_street_id;
 DROP INDEX public.index_stops_on_longitude;
 DROP INDEX public.index_stops_on_latitude;
 DROP INDEX public.index_routes_stops_on_stop_id;
@@ -274,7 +275,7 @@ ALTER TABLE ONLY streets ALTER COLUMN id SET DEFAULT nextval('streets_id_seq'::r
 --
 
 COPY ar_internal_metadata (key, value, created_at, updated_at) FROM stdin;
-environment	development	2016-12-09 05:16:54.040935	2016-12-09 05:16:54.040935
+environment	development	2016-12-21 15:48:35.327947	2016-12-21 15:48:35.327947
 \.
 
 
@@ -15737,6 +15738,7 @@ COPY routes_stops (stop_id, route_id) FROM stdin;
 COPY schema_migrations (version) FROM stdin;
 20161206014335
 20161207062839
+20161211234901
 \.
 
 
@@ -27794,6 +27796,13 @@ CREATE INDEX index_stops_on_latitude ON stops USING btree (latitude);
 --
 
 CREATE INDEX index_stops_on_longitude ON stops USING btree (longitude);
+
+
+--
+-- Name: index_stops_on_street_id; Type: INDEX; Schema: public; Owner: alan
+--
+
+CREATE INDEX index_stops_on_street_id ON stops USING btree (street_id);
 
 
 --
